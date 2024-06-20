@@ -1,21 +1,22 @@
 import pandas as pd
 
-# Create a sample DataFrame
-data = {'Name': ['Alice', 'Bob', 'Charlie', 'David'],
-        'Age': [25, 30, 35, 40],
-        'City': ['New York', 'Los Angeles', 'Chicago', 'Houston']}
-df = pd.DataFrame(data)
+dataframe = pd.read_csv('python_basic\student.csv')
 
-# Filter data based on a condition (e.g., age greater than 30)
-filtered_df = df[df['Age'] > 30]
-print(filtered_df)
-# Create a sample DataFrame with additional column
-data = {'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank'],
-        'Age': [25, 30, 35, 40, 25, 30],
-        'City': ['New York', 'Los Angeles', 'Chicago', 'Houston', 'New York', 'Chicago'],
-        'Salary': [50000, 60000, 70000, 80000, 55000, 65000]}
-df = pd.DataFrame(data)
+column_data = dataframe['first_name']
 
-# Group data by City and calculate mean salary for each city
-grouped_df = df.groupby('City').mean()
-print(grouped_df)
+dataframe_subset =dataframe[['first_name', 'last_name']]
+dataframe_filtered=len(dataframe['first_name']) >5
+print(dataframe.isnull().sum())
+dataframe.dropna(inplace=True)
+dataframe.drop_duplicates(inplace=True)
+dataframe_dropped_rows = dataframe.dropna()
+dataframe['ethnicity'] = dataframe['ethnicity'].fillna(dataframe['ethnicity'].mean())
+df_no_duplicates = dataframe.drop_duplicates()
+ny_df = dataframe[dataframe['hs_state'] == 'New York']
+print("\nFiltered DataFrame (hs_state is New York):")
+print(ny_df)
+grouped_by_city = dataframe.groupby('hs_city').mean()
+print("\nGrouped by hs_city (mean Age and Score):")
+print(grouped_by_city)
+
+
